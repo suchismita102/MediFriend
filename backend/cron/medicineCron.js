@@ -1,6 +1,6 @@
 const cron = require("node-cron");
 const Medicine = require("../Models/Medicine");
-//
+
 // run every minute
 cron.schedule("* * * * *", async () => {
 

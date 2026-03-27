@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const ensureAuthenticated = require("../Middlewares/Auth");
-//
+
 const {
   addMedicine,
   getMedicines,

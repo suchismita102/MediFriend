@@ -1,5 +1,5 @@
 const Medicine = require("../Models/Medicine");
-//
+
 const addMedicine = async (req, res) => {
   try {
 

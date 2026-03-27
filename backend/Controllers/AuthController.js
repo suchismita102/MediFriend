@@ -98,7 +98,7 @@ const updateProfile = async (req, res) => {
   try {
     const { name, email, password, profilePic } = req.body;
 
-    
+    // 1. Basic validation
     if (!name || name.length < 3 || name.length > 100) {
       return res.status(400).json({
         success: false,
@@ -113,7 +113,7 @@ const updateProfile = async (req, res) => {
       });
     }
 
-    
+    // 2. Check if new email is already used by another user
     if (email) {
       const existingUser = await UserModel.findOne({ email });
       if (existingUser && existingUser._id.toString() !== req.user._id.toString()) {
@@ -124,7 +124,7 @@ const updateProfile = async (req, res) => {
       }
     }
 
-    
+    // 3. Prepare update data
     const updateData = { name, profilePic };
     if (email) updateData.email = email;
     if (password && password.trim() !== "") {
@@ -132,7 +132,7 @@ const updateProfile = async (req, res) => {
       updateData.password = hashedPassword;
     }
 
-    
+    // 4. Update user in DB
     const updatedUser = await UserModel.findByIdAndUpdate(
         req.user._id,
         updateData,
